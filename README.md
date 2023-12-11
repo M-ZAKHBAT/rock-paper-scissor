@@ -37,6 +37,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Author
 
-[Your Name]
+[Mohammed ZAKHBAT]
 
 [Optional: Add contact information or a link to your GitHub profile.]
