@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Jeu de Pierre-Papier-Ciseaux </title>
+</head>
+
+<body>
+    <section>
+        <div class="choix">
+            <h4>Vous <span id="choix-utilisateur"></span></h4>
+            <h4>Ordinateur<span id="choix-Ordinateur"></span></h4>
+        </div>
+        <h4><span id="Resultat"></span></h4>
+        <div class="choix-button">
+            <button id="Pierre" onclick="play('pierre')">Pierre</button>
+            <button id="Papier" onclick="play('papier')">Papier</button>
+            <button id="Ciseau" onclick="play('ciseaux')">Ciseau</button>
+        </div>
+    </section>
+    <!-- <script src="main.js"></script> -->
+    <script>
+        // Sélection des éléments HTML pour afficher le résultat et les images des choix
+        const resultInfo = document.getElementById('Resultat');
+        const computerImg = document.getElementById('choix-Ordinateur');
+        const userImg = document.getElementById('choix-utilisateur');
+
+        const pierre = 'pierre.png'
+        const papier = 'papier.png'
+        const ciseaux = 'ciseaux.png'
+
+        const play = (choiseUser) => {
+            let result = '';
+            const choices = ['pierre', 'papier', 'ciseaux'];
+            const indexComputerChoice = Math.floor(Math.random() * choices.length)
+            // console.log(choices[indexComputerChoice])
+            // Condition pour vérifier l'égalité entre le choix de l'utilisateur et celui de l'ordinateur
+            if (choiseUser === choices[indexComputerChoice]) {
+                result = 'egalité';
+                console.log(`Computer: ${choices[indexComputerChoice]}`)
+                console.log(`User: ${choiseUser}`)
+
+                // Affichage des images pour l'égalité
+                if (choiseUser === 'pierre' && choices[indexComputerChoice] === 'pierre') {
+                    computerImg.innerHTML = `<img src="${pierre}">`;
+                    userImg.innerHTML = `<img src="${pierre}">`;
+                }
+                if (choiseUser === 'papier' && choices[indexComputerChoice] === 'papier') {
+                    computerImg.innerHTML = `<img src="${papier}">`;
+                    userImg.innerHTML = `<img src="${papier}">`;
+                }
+                if (choiseUser === 'ciseaux' && choices[indexComputerChoice] === 'ciseaux') {
+                    computerImg.innerHTML = `<img src="${ciseaux}">`;
+                    userImg.innerHTML = `<img src="${ciseaux}">`;
+                }
+
+
+
+            }
+            // Conditions pour vérifier quand l'utilisateur gagne
+            else if (
+                (choiseUser === 'pierre' && choices[indexComputerChoice] === 'ciseaux') ||
+                (choiseUser === 'papier' && choices[indexComputerChoice] === 'pierre') ||
+                (choiseUser === 'ciseaux' && choices[indexComputerChoice] === 'papier')
+            ) {
+                result = 'gagné';
+                console.log(`Computer: ${choices[indexComputerChoice]}`)
+                console.log(`User: ${choiseUser}`)
+
+                // Affichage des images pour la victoire
+                if (choiseUser === 'pierre' && choices[indexComputerChoice] === 'ciseaux') {
+                    userImg.innerHTML = `<img src="${pierre}">`;
+                    computerImg.innerHTML = `<img src="${ciseaux}">`;
+                }
+                if (choiseUser === 'papier' && choices[indexComputerChoice] === 'pierre') {
+                    userImg.innerHTML = `<img src="${papier}">`;
+                    computerImg.innerHTML = `<img src="${pierre}">`;
+                }
+                if (choiseUser === 'ciseaux' && choices[indexComputerChoice] === 'papier') {
+                    userImg.innerHTML = `<img src="${ciseaux}">`;
+                    computerImg.innerHTML = `<img src="${papier}">`;
+                }
+                // fin 
+
+            }
+            // Conditions pour vérifier quand l'utilisateur perd 
+            else if (
+                (choiseUser === 'ciseaux' && choices[indexComputerChoice] === 'pierre') ||
+                (choiseUser === 'pierre' && choices[indexComputerChoice] === 'papier') ||
+                (choiseUser === 'papier' && choices[indexComputerChoice] === 'ciseaux')
+            ) {
+                result = 'perdu :(';
+                console.log(`Computer: ${choices[indexComputerChoice]}`)
+                console.log(`User: ${choiseUser}`)
+
+                // Affichage des images pour la défaite
+                if (choiseUser === 'ciseaux' && choices[indexComputerChoice] === 'pierre') {
+                    userImg.innerHTML = `<img src="${ciseaux}">`;
+                    computerImg.innerHTML = `<img src="${pierre}">`;
+                }
+                if (choiseUser === 'pierre' && choices[indexComputerChoice] === 'papier') {
+                    userImg.innerHTML = `<img src="${pierre}">`;
+                    computerImg.innerHTML = `<img src="${papier}">`;
+                }
+                if (choiseUser === 'papier' && choices[indexComputerChoice] === 'ciseaux') {
+                    userImg.innerHTML = `<img src="${papier}">`;
+                    computerImg.innerHTML = `<img src="${ciseaux}">`;
+                }
+                // fin 
+
+            }
+
+            resultInfo.innerHTML = result;
+        }
+    </script>
+</body>
+
+</html>
